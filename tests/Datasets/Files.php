@@ -42,3 +42,40 @@ dataset('file-type-validations', function () {
         ]
     ];
 });
+
+dataset('parser-results', function() {
+    return [
+        'no duplicates are present' => [
+            PATH_PREFIX . 'l_noDuplicates.json',
+            [
+                'duplicatesRemovedCount' => 0,
+                'leadsPreservedCount' => 5,
+                'originalLeadsCount' => 5
+            ]
+        ],
+        'leads with duplicate IDs are filtered' => [
+            PATH_PREFIX . 'l_duplicateIds.json',
+            [
+                'duplicatesRemovedCount' => 3,
+                'leadsPreservedCount' => 6,
+                'originalLeadsCount' => 9
+            ]
+        ],
+        'leads with duplicate emails are filtered' => [
+            PATH_PREFIX . 'l_duplicateEmails.json',
+            [
+                'duplicatesRemovedCount' => 4,
+                'leadsPreservedCount' => 5,
+                'originalLeadsCount' => 9
+            ]
+        ],
+        'leads with duplicate IDs and emails are filtered' => [
+            PATH_PREFIX . 'l_duplicateIdAndEmail.json',
+            [
+                'duplicatesRemovedCount' => 4,
+                'leadsPreservedCount' => 9,
+                'originalLeadsCount' => 13
+            ]
+        ]
+    ];
+});
