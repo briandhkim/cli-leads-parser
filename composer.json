@@ -1,0 +1,18 @@
+{
+    "require": {
+        "symfony/console": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.6"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
