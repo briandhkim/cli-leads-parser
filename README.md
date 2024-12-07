@@ -38,7 +38,7 @@ packages used:
     ```bash
     php parser.php {file path here}
     ```
-    <u>example</u>:
+    <ins>example</ins>:
     ![script ex](/assets/script_run.png)
     1. Running the command line program. <br/>In this example, the leads data, `leads.json`, was added to the project root
 
@@ -46,13 +46,14 @@ packages used:
 
     3. The log containing updates made can be found in the `storage/logs/leads` directory.
 
-# Notes from dev
+# Notes from the dev
 
-<b><i>I sought to get some clarification on certain parts of the specification provided, and I was advised to make personal call on the best route to move forward. Below are notes on some of the decisions made.</i></b>
+> [!NOTE]
+> I sought to get some clarification on certain parts of the specification provided, and I was advised to make personal call on the best route to move forward. Below are notes on some of the decisions made.
 
 ---
 
-<u>Rule #2</u>:
+<ins>Rule #2</ins>:
 > Duplicate IDs count as dups. Duplicate emails count as dups. Both must be unique in our dataset. Duplicate values elsewhere do not count as dups.
 
 <i>I interpreted this to mean that the leads would be considered as duplicates if either</i> `id` <b>OR</b> `email` 
@@ -60,14 +61,14 @@ packages used:
 
 ---
 
-<u>Consolidating the duplicates</u>
+<ins>Consolidating the duplicates</ins>
 > The application should also provide a log of changes including some representation of the source record, the output record and the individual field changes (value from and value to) for each field.
 
 <i>based on</i> "...the individual field changes (value from and value to) for each field" <i>I thought the consolidation could be interpreted as one of the following:</i>
 
 1. The `leads` array does not remove the duplicated record but updates the individual field of the `lead` data <br/>
     example: <br/>
-    <u>before</u>
+    <ins>before</ins>
     ```json
     {
         "leads": [
@@ -90,9 +91,9 @@ packages used:
         ]
     }
     ```
-    <u>after</u>
+    <ins>after</ins>
     ```json
-        {
+    {
         "leads": [
             {
                 "_id": "jkj238238jdsnfsj23",
@@ -116,7 +117,7 @@ packages used:
 
 2. The duplicate `lead` is removed from the final `leads` array <br/>
         example: <br/>
-    <u>before</u>
+    <ins>before</ins>
     ```json
     {
         "leads": [
@@ -139,9 +140,9 @@ packages used:
         ]
     }
     ```
-    <u>after</u>
+    <ins>after</ins>
     ```json
-        {
+    {
         "leads": [
             {
                 "_id": "jkj238238jdsnfsj23",
@@ -155,4 +156,4 @@ packages used:
     }
     ```
 
-<i>I chose to follow option</i> `#2` <i>which removes the duplicate record(s) from the array</i>
+<i>I chose to follow option</i> `#2` <i>which removes the duplicate record(s) from the array. Although option 1 does update the dupcliate records with the data that should be preferred, it seemed counter-intuitive with the overall goal since it would still leave duplicate records in the final output array.</i>
