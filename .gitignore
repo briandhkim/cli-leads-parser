@@ -1,3 +1,5 @@
+/.vscode
 /vendor
 
-/.vscode
+/storage/logs/leads/*
+/storage/leads/*

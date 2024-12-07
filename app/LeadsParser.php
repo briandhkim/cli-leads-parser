@@ -67,9 +67,9 @@ class LeadsParser
                 $date = $lead['entryDate'];
                 $timestamp = strtotime($date);
                 /**
-                 * gte comparison:
-                 * rule #1: The data from the newest date should be preferred
-                 * rule #3: if the dates are identical, the data from the 
+                 * greater-than-or-equal comparison:
+                 * rule #1 - The data from the newest date should be preferred
+                 * rule #3 - If the dates are identical, the data from the 
                  * record provided last in the list should be preferred
                  */
                 if ($timestamp >= $maxTimestamp) {
