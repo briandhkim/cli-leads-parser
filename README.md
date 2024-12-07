@@ -16,14 +16,6 @@ The application should also provide a log of changes including some representati
 
 Please implement as a command line program.
 
----
-
-# Notes
-
-## from the dev/applicant
-- 
-
----
 
 # Setup guide
 
@@ -35,7 +27,7 @@ packages used:
     - [pest](https://pestphp.com/) - for testing
     - [Symfony console](https://symfony.com/doc/current/components/console.html) - for formatting console output
     - [justinrainbow/json-schema](https://github.com/jsonrainbow/json-schema) - for validating json schema
-    
+
 - running tests:
     ```bash
     php vendor/bin/pest
@@ -48,8 +40,119 @@ packages used:
     ```
     <u>example</u>:
     ![script ex](/assets/script_run.png)
-    1. Running the command line program. In this example, the leads data, `leads.json`, was added to the project root
+    1. Running the command line program. <br/>In this example, the leads data, `leads.json`, was added to the project root
 
     2. The updated json file can be found in the `storage/leads` directory.
 
     3. The log containing updates made can be found in the `storage/logs/leads` directory.
+
+# Notes from dev
+
+<b><i>I sought to get some clarification on certain parts of the specification provided, and I was advised to make personal call on the best route to move forward. Below are notes on some of the decisions made.</i></b>
+
+---
+
+<u>Rule #2</u>:
+> Duplicate IDs count as dups. Duplicate emails count as dups. Both must be unique in our dataset. Duplicate values elsewhere do not count as dups.
+
+<i>I interpreted this to mean that the leads would be considered as duplicates if either</i> `id` <b>OR</b> `email` 
+<i> field was duplicated rather than both fields needing to be duplicated.</i>
+
+---
+
+<u>Consolidating the duplicates</u>
+> The application should also provide a log of changes including some representation of the source record, the output record and the individual field changes (value from and value to) for each field.
+
+<i>based on</i> "...the individual field changes (value from and value to) for each field" <i>I thought the consolidation could be interpreted as one of the following:</i>
+
+1. The `leads` array does not remove the duplicated record but updates the individual field of the `lead` data <br/>
+    example: <br/>
+    <u>before</u>
+    ```json
+    {
+        "leads": [
+            {
+                "_id": "jkj238238jdsnfsj23",
+                "email": "foo@bar.com",
+                "firstName": "John",
+                "lastName": "Smith",
+                "address": "123 Street St",
+                "entryDate": "2014-05-07T17:30:20+00:00"
+            },
+            {
+                "_id": "jkj238238jdsnfsj23",
+                "email": "coo@bar.com",
+                "firstName": "Ted",
+                "lastName": "Jones",
+                "address": "456 Neat St",
+                "entryDate": "2014-05-07T17:32:20+00:00"
+            }
+        ]
+    }
+    ```
+    <u>after</u>
+    ```json
+        {
+        "leads": [
+            {
+                "_id": "jkj238238jdsnfsj23",
+                "email": "coo@bar.com",
+                "firstName": "Ted",
+                "lastName": "Jones",
+                "address": "456 Neat St",
+                "entryDate": "2014-05-07T17:30:20+00:00"
+            },
+            {
+                "_id": "jkj238238jdsnfsj23",
+                "email": "coo@bar.com",
+                "firstName": "Ted",
+                "lastName": "Jones",
+                "address": "456 Neat St",
+                "entryDate": "2014-05-07T17:32:20+00:00"
+            }
+        ]
+    }
+    ```
+
+2. The duplicate `lead` is removed from the final `leads` array <br/>
+        example: <br/>
+    <u>before</u>
+    ```json
+    {
+        "leads": [
+            {
+                "_id": "jkj238238jdsnfsj23",
+                "email": "foo@bar.com",
+                "firstName": "John",
+                "lastName": "Smith",
+                "address": "123 Street St",
+                "entryDate": "2014-05-07T17:30:20+00:00"
+            },
+            {
+                "_id": "jkj238238jdsnfsj23",
+                "email": "coo@bar.com",
+                "firstName": "Ted",
+                "lastName": "Jones",
+                "address": "456 Neat St",
+                "entryDate": "2014-05-07T17:32:20+00:00"
+            }
+        ]
+    }
+    ```
+    <u>after</u>
+    ```json
+        {
+        "leads": [
+            {
+                "_id": "jkj238238jdsnfsj23",
+                "email": "coo@bar.com",
+                "firstName": "Ted",
+                "lastName": "Jones",
+                "address": "456 Neat St",
+                "entryDate": "2014-05-07T17:32:20+00:00"
+            }
+        ]
+    }
+    ```
+
+<i>I chose to follow option</i> `#2` <i>which removes the duplicate record(s) from the array</i>
