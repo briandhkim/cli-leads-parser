@@ -29,10 +29,27 @@ Please implement as a command line program.
 
 - this program uses php, so running it will require having PHP installed <br/> 
 Ideally version `8.2+`
+
 - make sure to run `composer install` to install the necessary packages <br/>
 packages used:
     - [pest](https://pestphp.com/) - for testing
     - [Symfony console](https://symfony.com/doc/current/components/console.html) - for formatting console output
     - [justinrainbow/json-schema](https://github.com/jsonrainbow/json-schema) - for validating json schema
+    
 - running tests:
+    ```bash
+    php vendor/bin/pest
+    ```
+    ![unit test](/assets/test_sample.png)
+
 - running the command line program:
+    ```bash
+    php parser.php {file path here}
+    ```
+    <u>example</u>:
+    ![script ex](/assets/script_run.png)
+    1. Running the command line program. In this example, the leads data, `leads.json`, was added to the project root
+
+    2. The updated json file can be found in the `storage/leads` directory.
+
+    3. The log containing updates made can be found in the `storage/logs/leads` directory.
