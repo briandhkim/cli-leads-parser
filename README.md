@@ -1,3 +1,6 @@
+> [!NOTE]
+> Brief explanation of the application and certain decisions made during development: [loom video link](https://www.loom.com/share/16c44fb7ce60447c84ad08945f837039?sid=259cfd21-f1e4-41f5-a5be-e8bb9995c752)
+
 # Task
 
 Take a variable number of identically structured json records and de-duplicate the set.
@@ -19,22 +22,23 @@ Please implement as a command line program.
 
 # Setup guide
 
-- this program uses php, so running it will require having PHP installed <br/> 
+- This program uses php, so running it will require having PHP installed <br/> 
 Ideally version `8.2+`
 
-- make sure to run `composer install` to install the necessary packages <br/>
-packages used:
+- The program users [composer](https://getcomposer.org/) as the dependency manager. This will also need to be installed to get the dependencies used for this application. <br/> 
+Make sure to run `composer install` to install the necessary packages <br/>
+Packages used:
     - [pest](https://pestphp.com/) - for testing
     - [Symfony console](https://symfony.com/doc/current/components/console.html) - for formatting console output
     - [justinrainbow/json-schema](https://github.com/jsonrainbow/json-schema) - for validating json schema
 
-- running tests:
+- Running tests:
     ```bash
     php vendor/bin/pest
     ```
     ![unit test](/assets/test_sample.png)
 
-- running the command line program:
+- Running the command line program:
     ```bash
     php parser.php {file path here}
     ```
@@ -64,7 +68,7 @@ packages used:
 <ins>Consolidating the duplicates</ins>
 > The application should also provide a log of changes including some representation of the source record, the output record and the individual field changes (value from and value to) for each field.
 
-<i>based on</i> "...the individual field changes (value from and value to) for each field" <i>I thought the consolidation could be interpreted as one of the following:</i>
+<i>Based on</i> "...the individual field changes (value from and value to) for each field" <i>I thought the consolidation could be interpreted as one of the following:</i>
 
 1. The `leads` array does not remove the duplicated record but updates the individual field of the `lead` data <br/>
     example: <br/>
