@@ -18,7 +18,7 @@ Simplifying assumption: the program can do everything in memory (don't worry abo
 The application should also provide a log of changes including some representation of the source record, the output record and the individual field changes (value from and value to) for each field.
 
 Please implement as a command line program.
-
+![instructions](/assets/instructions.png)
 
 # Setup guide
 
