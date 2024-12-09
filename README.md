@@ -1,6 +1,6 @@
 > [!NOTE]
-> Going over how the app works: [loom video link #1](https://www.loom.com/share/595b7c19e3c34e5db15216f9d6184ffa?sid=c6085c71-3fb0-407b-9d2d-53a876977fae)
-> Explanation on some of decisions made around app logic based on the rules provided: [loom video link #2](https://www.loom.com/share/6fcae7ca1fba45f383bf61fa6411be45?sid=70b36b7f-3d87-45df-8112-c924678c410d) 
+> - Going over how the app works: [loom video link #1](https://www.loom.com/share/595b7c19e3c34e5db15216f9d6184ffa?sid=c6085c71-3fb0-407b-9d2d-53a876977fae)
+> - Explanation on some of decisions made around app logic based on the rules provided: [loom video link #2](https://www.loom.com/share/6fcae7ca1fba45f383bf61fa6411be45?sid=70b36b7f-3d87-45df-8112-c924678c410d) 
 
 # Task
 
